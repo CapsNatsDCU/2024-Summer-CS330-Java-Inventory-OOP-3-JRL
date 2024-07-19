@@ -44,8 +44,11 @@ public class Consumable extends Item {
     public Consumable()
     {
         super("[Placeholder]");
+        effect = "";
+        uses = 0;
 
         // Complete the remainder of this method
+        //attempted
     }
 
     /**
@@ -83,6 +86,7 @@ public class Consumable extends Item {
      *
      * @param allowed number of allowed uses
      */
+
     public void setNumberOfUses(int allowed)
     {
         this.uses = allowed;
@@ -98,13 +102,15 @@ public class Consumable extends Item {
     public int requiredNumberOfValues()
     {
         // Replace this with the correct value
-        return -1;
+        return 3;
     }
 
     @Override
     public void fromTokens(String[] tokens)
     {
-
+        this.setName(tokens[0]);
+        this.setEffect(tokens[1]);
+        this.setNumberOfUses(Integer.parseInt(tokens[2]));
     }
 
     /**
@@ -114,7 +120,11 @@ public class Consumable extends Item {
     public Item clone()
     {
         // Replace the next line
-        return null;
+        Consumable neo = new Consumable();
+        neo.name = this.name;
+        neo.effect = this.effect;
+        neo.uses = this.uses;
+        return neo;
     }
 
     /**
@@ -129,8 +139,14 @@ public class Consumable extends Item {
             return false;
         }
 
+        Consumable comp = (Consumable) rhs;
+
+        if (!this.name.equals(comp.name)) {return false;}
+        if (!this.effect.equals(comp.effect)) {return false;}
+
         // Replace the "return false" with your logic
-        return false;
+        //attempted
+        return true;
     }
 
     /**
@@ -138,19 +154,23 @@ public class Consumable extends Item {
      *
      * Add <code>name.hashCode()</code> and <code>effect.hashCode</code>, then
      * return the result.
+     * attempted
      */
     @Override
     public int hashCode()
     {
-        return -1;
+        return name.hashCode() + effect.hashCode();
     }
 
     /**
      * *Print* the Consumable Item.
      */
     @Override
-    public String toString()
-    {
-        return "Make sure to check Armour.toString for hints.";
+    public String toString() {
+        return String.format(FMT_STR,
+            this.getName(),
+            this.getEffect(),
+            this.getNumberOfUses());
     }
+
 }

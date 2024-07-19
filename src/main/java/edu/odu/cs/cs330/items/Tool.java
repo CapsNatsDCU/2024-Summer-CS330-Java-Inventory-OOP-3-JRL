@@ -69,13 +69,19 @@ public class Tool extends Equippable {
     public int requiredNumberOfValues()
     {
         // Replace this with the correct value
-        return -1;
+        //atempted
+        return 6;
     }
 
     @Override
     public void fromTokens(String[] tokens)
     {
-
+        this.setName(tokens[0]);
+        this.setMaterial(tokens[1]);
+        this.setDurability(Integer.parseInt(tokens[2]));
+        this.setSpeed(Integer.parseInt(tokens[3]));
+        this.setModifier(tokens[4]);
+        this.setModifierLevel(Integer.parseInt(tokens[5]));
     }
 
     /**
@@ -84,7 +90,15 @@ public class Tool extends Equippable {
     @Override
     public Item clone()
     {
-        return null;
+        Tool boba = new Tool();
+        boba.name = this.name;
+        boba.speed = this.speed;
+        boba.setDurability(this.getDurability());
+        boba.setMaterial(this.getMaterial());
+        boba.setModifier(this.getModifier());
+        boba.setModifierLevel(this.getModifierLevel());
+        boba.setElement(this.getElement());
+        return boba;
     }
 
     /**
@@ -100,9 +114,15 @@ public class Tool extends Equippable {
             return false;
         }
 
-        Tool rhsItem = (Tool) rhs;
+        Tool compTool = (Tool) rhs;
 
-        return false;
+        if (!compTool.name.equals(this.name)) {return false;}
+        if (compTool.getSpeed() != this.getSpeed()) {return false;}
+        if (!compTool.getMaterial().equals(this.getMaterial())) {return false;}
+        if (!compTool.getModifier().equals(this.getModifier())) {return false;}
+        if (compTool.getModifierLevel() != this.getModifierLevel()) {return false;}
+
+        return true;
     }
 
     /**

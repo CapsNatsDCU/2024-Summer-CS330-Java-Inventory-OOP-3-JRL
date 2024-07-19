@@ -42,8 +42,8 @@ public class Armour extends Equippable {
     public Armour()
     {
         super();
-
-        // Complete the remainder of this method
+        name = "";
+        defense = 0;
     }
 
     /**
@@ -70,18 +70,22 @@ public class Armour extends Equippable {
     public int requiredNumberOfValues()
     {
         // Replace this with the correct value
-        return -1;
+        return 7;
     }
 
     @Override
     public void fromTokens(String[] tokens)
     {
         this.setName(tokens[0]);
-
         this.setMaterial(tokens[1]);
         this.setDurability(Integer.parseInt(tokens[2]));
+        this.setDefense(Integer.parseInt(tokens[3]));
+        this.setModifier(tokens[4]);
+        this.setModifierLevel(Integer.parseInt(tokens[5]));
+        this.setElement(tokens[6]);
 
         // Complete the remainder of this method
+        //attempted
     }
 
     /**
@@ -93,7 +97,15 @@ public class Armour extends Equippable {
         Armour cpy = new Armour();
 
         // Complete the remainder of this method
+        //attempted
 
+        cpy.name = this.name;
+        cpy.defense = this.defense;
+        cpy.setMaterial(this.getMaterial());
+        cpy.setDurability(this.getDurability());
+        cpy.setModifier(this.getModifier());
+        cpy.setModifierLevel(this.getModifierLevel());
+        cpy.setElement(this.getElement());
 
         return cpy;
     }
@@ -113,8 +125,16 @@ public class Armour extends Equippable {
 
         Armour rhsItem = (Armour) rhs;
 
+        if(!this.name.equals(rhsItem.name)){return false;}
+        if(!this.getMaterial().equals(rhsItem.getMaterial())){return false;}
+        if(!this.getModifier().equals(rhsItem.getModifier())){return false;}
+        if(this.getModifierLevel() != rhsItem.getModifierLevel()){return false;}
+        if(!this.getElement().equals(rhsItem.getElement())){return false;}
+        if(this.defense != rhsItem.defense){return false;}
+
         // Complete the remainder of this method
-        return false;
+        //attempted
+        return true;
     }
 
     /**
@@ -140,10 +160,17 @@ public class Armour extends Equippable {
      * *Print* one Armour.
      */
     @Override
-    public String toString()
-    {
-        return "Use FMT_STR, accessors and String.format...";
+    public String toString() {
+      return String.format(FMT_STR,
+          this.getName(),
+          this.getDurability(),
+          this.getDefense(),
+          this.getMaterial(),
+          this.getModifier(),
+          this.getModifierLevel(),
+          this.getElement());
     }
+    
 }
 
 
